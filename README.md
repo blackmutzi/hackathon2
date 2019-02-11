@@ -10,7 +10,7 @@ Prepare a code commit with all concept files (.md) and all code you wrote for yo
 The best structured Pull Request with most valuable work inside will win 200Euro Coupon :)
 
 ## How to create a Pull Request
-Use these following steps to create a Pull Request (other ways work too:
+Use these following steps to create a Pull Request (other ways work too):
 
     Clone Repository
     Create a new Branch with your name
@@ -22,4 +22,4 @@ Use these following steps to create a Pull Request (other ways work too:
     Profit
 
 ## Thank you
-Thank you again for your participation of the second vulidity hackathon.
+Thank you again for your participation in the second Vulidity hackathon.
