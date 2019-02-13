@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div style="width:80%; height:400px; overflow:auto">
+        <table class="table table-bordered" style="width:100%;">
+            <tbody id="chatBox">
+
+            </tbody>
+        </table>
+    </div>
+    <input type="text" id="nameBox" style="width:20%" placeholder="Username">
+    <input type="text" id="sendBox" style="width:60%; display: inline"; placeholder="Nachricht">
+    <button type="button" id="sendButton" style="width:10%; display:inline;" id="chatBox" class="btn btn-success">Absenden</button>
+
+    <script>
+        var sendBox = document.querySelector("#sendBox");
+        var nameBox = document.querySelector("#nameBox");
+         var source = new EventSource("/events");
+         source.onmessage = function(event) {
+             $("#chatBox").append("<tr style='border-bottom:1px solid black'><td>"+event.data+"</td></tr>")
+        };
+
+
+        $("#sendButton").on("click",function() {
+            var message= {"message": sendBox.value,
+                            "name": nameBox.value };
+            sendBox.value="";
+            $.ajax({
+                url: "/send",
+                method: "POST",
+                dataType: "json",
+                data: JSON.stringify(message)
+            }).done(function() {
+                console.log("ging");
+            }).fail(function(data) {
+                console.log(data);
+                console.log("fehlgeschlagen");
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
